@@ -1,16 +1,23 @@
-# This is a sample Python script.
+from flask import Flask
+from flask_restful import Api, Resource
 
-# Press ⌃R to execute it or replace it with your code.
-# Press Double ⇧ to search everywhere for classes, files, tool windows, actions, and settings.
+app = Flask(__name__)
+api = Api(app)
+
+yourJson = [
+    {
+        "id": 0,
+        "content": "You can put whatever you want in key value pairs here",
+    }
+]
 
 
-def print_hi(name):
-    # Use a breakpoint in the code line below to debug your script.
-    print(f'Hi, {name}')  # Press ⌘F8 to toggle the breakpoint.
+class APIExample(Resource):
+    def get(self):
+        return yourJson
 
 
-# Press the green button in the gutter to run the script.
+api.add_resource(APIExample, "/api-example", "/api-example/")
+
 if __name__ == '__main__':
-    print_hi('PyCharm')
-
-# See PyCharm help at https://www.jetbrains.com/help/pycharm/
+    app.run(debug=True)
